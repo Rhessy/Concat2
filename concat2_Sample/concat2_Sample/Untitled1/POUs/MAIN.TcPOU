@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.13">
+  <POU Name="MAIN" Id="{8d9cab9d-39d0-4f74-964d-1c4735f177b3}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MAIN
+VAR
+//Declare the two strings which are going to exceed the limit of 255 characters when concatenated 
+string1 : STRING(1000) := 'Lorem ipsum odor amet, consectetuer adipiscing elit. Non per dapis himenaeos eros justo consectetur nam. Lorem ipsum odor amet, consectetuer adipiscing elit. Faucibus nec a Test Lorem ipsum odor amet, consectetuer adipiscing elit. Faucibus nec a Test';
+string2 : STRING(1000) := 'Lorem ipsum odor amet, consectetuer adipiscing elit. Faucibus nec a Test Lorem ipsum odor amet, consectetuer adipiscing elit. Faucibus nec a Test Lorem ipsum odor amet, consectetuer adipiscing elit. Faucibus nec a Test Lorem ipsum odor amet, consectetuer adipiscing elit. Faucibus nec a Test';
+//Declare a 3rd string for the concatenated result to be stored and set it to the desired size.
+string3 : STRING(1000);
+
+
+//Declare 3 string pointers 
+pString1 : POINTER TO STRING;
+pString2 : POINTER TO STRING;
+pString3 : POINTER TO STRING;
+
+
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[//assign each string pointer variable to the value of each string 
+pString1 := ADR(string1);
+pString2 := ADR(string2);
+pString3 := ADR(string3);
+
+concat2(pString1, pString2, pString3, 1000);]]></ST>
+    </Implementation>
+    <LineIds Name="MAIN">
+      <LineId Id="23" Count="0" />
+      <LineId Id="18" Count="3" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>
